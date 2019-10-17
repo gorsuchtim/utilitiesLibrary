@@ -1,6 +1,6 @@
 "use strict";
-// this = !this
-const utilities = {
+
+const Utilities = {
   ariaToggle(element, attr) {
     return element.setAttribute(attr, element.getAttribute(attr) == "false");
   },
@@ -20,17 +20,13 @@ const utilities = {
     const date = new Date();
     return date.getDate();
   },
+  getYear() {
+    const date = new Date();
+    return date.getFullYear();
+  },
   getMonthName() {
     const date = new Date();
     return date.toLocaleString("en-us", { month: "long" });
-  },
-  getFile(filePath) {
-    const fileToGet = $.ajax({
-      type: "Get",
-      url: filePath,
-      async: false
-    });
-    return fileToGet;
   },
   getMonthFromString(month) {
     return new Date(Date.parse(month + " 1, 2012")).getMonth();
@@ -81,7 +77,18 @@ const utilities = {
     if (element !== null) {
       return true;
     }
+  },
+  toArray(list) {
+    if (Array.from) {
+      return Array.from(list);
+    } else {
+      var newArray = [];
+      for (var i = 0; i < list.length; i++) {
+        newArray.push(list[i]);
+      }
+      return newArray;
+    }
   }
 };
 
-export default utilities;
+export default Utilities;
